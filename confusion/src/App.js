@@ -15,7 +15,7 @@ class App extends Component {
 
     render(){
         return (
-            <div className="App">s
+            <div className="App">
                 <Navbar dark color="primary">
                     <div className="container">
                         <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
