@@ -3,7 +3,7 @@ import {Card, CardBody, CardImg, CardText, CardTitle} from "reactstrap";
 import Menu from "./MenuComponent";
 
 
-class DishdetailComponent extends Component{
+class DishDetail extends Component{
     constructor(props) {
         super(props);
     }
@@ -14,7 +14,7 @@ class DishdetailComponent extends Component{
                 return (
                     <li key={comment.id}>
                         <p>{comment.comment}</p>
-                        <p>-- {comment.author}, {comment.date.split('T')[0].split("-").reverse().join(".")}</p>
+                        <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                     </li>
                 );
             }else{
@@ -33,18 +33,20 @@ class DishdetailComponent extends Component{
     renderDish(dish){
         if(dish!=null){
             return (
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <Card>
-                            <CardImg top src={dish.image} alt={dish.name} />
-                            <CardBody>
-                                <CardTitle>{dish.name}</CardTitle>
-                                <CardText>{dish.description}</CardText>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-12 col-md-6">
-                        {this.renderComments(dish)}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <Card>
+                                <CardImg top src={dish.image} alt={dish.name} />
+                                <CardBody>
+                                    <CardTitle>{dish.name}</CardTitle>
+                                    <CardText>{dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </div>
+                        <div className="col-12 col-md-6">
+                            {this.renderComments(dish)}
+                        </div>
                     </div>
                 </div>
             );
@@ -66,4 +68,4 @@ class DishdetailComponent extends Component{
     }
 }
 
-export default DishdetailComponent;
+export default DishDetail;
