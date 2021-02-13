@@ -2,8 +2,6 @@ import React from 'react';
 import {Card, CardBody, CardImg, CardText, CardTitle} from "reactstrap";
 import Menu from "./MenuComponent";
 
-
-
     function RenderComments({comments}){
         const list = comments.map((comment) => {
             if (comment != null){
@@ -41,7 +39,6 @@ import Menu from "./MenuComponent";
             );
         }
     }
-
     const DishDetail = (props) => {
         const dish = props.dish;
         if(dish!=null){
