@@ -1,5 +1,6 @@
 import React from 'react';
-import {Card, CardBody, CardImg, CardText, CardTitle} from "reactstrap";
+import {Card, CardBody, CardImg, CardText, CardTitle, Breadcrumb, BreadcrumbItem} from "reactstrap";
+import { Link } from 'react-router-dom';
 import Menu from "./MenuComponent";
 
     function RenderComments({comments}){
@@ -45,8 +46,20 @@ import Menu from "./MenuComponent";
             return (
                 <div className="container">
                     <div className="row">
+                        <div className="col-12">
+                            <Breadcrumb>
+                                <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                                <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            </Breadcrumb>
+                        </div>
+                        <div className="col-12">
+                            <h3>{props.dish.name}</h3>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row">
                         <RenderDish dish={props.dish}/>
-                        <RenderComments comments={props.dish.comments}/>
+                        <RenderComments comments={props.comments}/>
                     </div>
                 </div>
             );
