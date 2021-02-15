@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col} from "reactstrap";
+import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, FormFeedback} from "reactstrap";
 import {Link} from "react-router-dom";
 
 class Contact extends Component{
@@ -9,13 +9,20 @@ class Contact extends Component{
             firstname: '',
             lastname: '',
             telnum: '',
-            useremail: '',
+            email: '',
             agree: false,
             contactType: 'Tel.',
-            message: ''
+            message: '',
+            touched: {
+                firstname: false,
+                lastname: false,
+                telnum: false,
+                email: false
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
     }
     handleInputChange(event){
         const target = event.target;
@@ -31,7 +38,51 @@ class Contact extends Component{
         alert('Current State is:'+JSON.stringify(this.state));
         event.preventDefault();
     }
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]:true }
+        })
+    }
+    validate(firstname, lastname, telnum, email){
+        const errors = {
+            firstname: '',
+            lastname: '',
+            telnum: '',
+            email: '',
+        }
+
+        //firstname
+        if(this.state.touched.firstname && firstname.length <= 3){
+            errors.firstname = 'First Name should be >= 3 characters';
+        }else if(this.state.touched.firstname && firstname.length > 10){
+            errors.firstname = 'First Name should be <= 10 characters';
+        }
+
+        //lastname
+        if(this.state.touched.lastname && lastname.length < 3){
+            errors.lastname = 'Last Name should be >= 3 characters';
+        }else if(this.state.touched.lastname && lastname.length > 10){
+            errors.lastname = 'Last Name should be <= 10 characters';
+        }
+
+        //telnum
+        const reg= /^\d+$/;
+        if(this.state.touched.telnum && !reg.test(telnum)){
+            errors.telnum = 'Tel. Number should contain only numbers';
+        }else if(this.state.touched.telnum && telnum.length > 9){
+            errors.telnum = 'Tel. Number should contain exact 9 characters';
+        }
+
+        //email
+        if(this.state.touched.email && email.split('').filter(x=>x==='@').length !== 1){
+            errors.email = 'Please provide a valid email with @ character';
+        }
+
+        return errors;
+    }
+
     render() {
+        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
         return(
             <div className="container">
                 <div className="row">
@@ -86,9 +137,13 @@ class Contact extends Component{
                                         id="firstname"
                                         name="firstname"
                                         placeholder="First Name"
+                                        valid={errors.firstname === ''}
+                                        invalid={errors.firstname != ''}
+                                        onBlur={this.handleBlur('firstname')}
                                         value={this.state.firstname}
                                         onChange={this.handleInputChange}
                                     />
+                                    <FormFeedback>{errors.firstname}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -99,9 +154,13 @@ class Contact extends Component{
                                         id="lastname"
                                         name="lastname"
                                         placeholder="Last Name"
+                                        valid={errors.lastname === ''}
+                                        invalid={errors.lastname != ''}
+                                        onBlur={this.handleBlur('lastname')}
                                         value={this.state.lastname}
                                         onChange={this.handleInputChange}
                                     />
+                                    <FormFeedback>{errors.lastname}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -112,22 +171,30 @@ class Contact extends Component{
                                         id="telnum"
                                         name="telnum"
                                         placeholder="Tel. Number"
+                                        valid={errors.telnum === ''}
+                                        invalid={errors.telnum != ''}
+                                        onBlur={this.handleBlur('telnum')}
                                         value={this.state.telnum}
                                         onChange={this.handleInputChange}
                                     />
+                                    <FormFeedback>{errors.telnum}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
-                                <Label htmlFor="useremail" md={3}>Email</Label>
+                                <Label htmlFor="email" md={3}>Email</Label>
                                 <Col md={9}>
                                     <Input
                                         type="email"
-                                        id="useremail"
-                                        name="useremail"
+                                        id="email"
+                                        name="email"
                                         placeholder="Email"
-                                        value={this.state.useremail}
+                                        valid={errors.email === ''}
+                                        invalid={errors.email != ''}
+                                        onBlur={this.handleBlur('email')}
+                                        value={this.state.email}
                                         onChange={this.handleInputChange}
                                     />
+                                    <FormFeedback>{errors.email}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
