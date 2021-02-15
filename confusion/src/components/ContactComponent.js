@@ -37,6 +37,7 @@ class Contact extends Component{
         console.log('Current State is:'+JSON.stringify(this.state));
         alert('Current State is:'+JSON.stringify(this.state));
         event.preventDefault();
+
     }
     handleBlur = (field) => (evt) => {
         this.setState({
@@ -138,7 +139,7 @@ class Contact extends Component{
                                         name="firstname"
                                         placeholder="First Name"
                                         valid={errors.firstname === ''}
-                                        invalid={errors.firstname != ''}
+                                        invalid={errors.firstname !== ''}
                                         onBlur={this.handleBlur('firstname')}
                                         value={this.state.firstname}
                                         onChange={this.handleInputChange}
@@ -155,7 +156,7 @@ class Contact extends Component{
                                         name="lastname"
                                         placeholder="Last Name"
                                         valid={errors.lastname === ''}
-                                        invalid={errors.lastname != ''}
+                                        invalid={errors.lastname !== ''}
                                         onBlur={this.handleBlur('lastname')}
                                         value={this.state.lastname}
                                         onChange={this.handleInputChange}
@@ -172,7 +173,7 @@ class Contact extends Component{
                                         name="telnum"
                                         placeholder="Tel. Number"
                                         valid={errors.telnum === ''}
-                                        invalid={errors.telnum != ''}
+                                        invalid={errors.telnum !== ''}
                                         onBlur={this.handleBlur('telnum')}
                                         value={this.state.telnum}
                                         onChange={this.handleInputChange}
@@ -189,7 +190,7 @@ class Contact extends Component{
                                         name="email"
                                         placeholder="Email"
                                         valid={errors.email === ''}
-                                        invalid={errors.email != ''}
+                                        invalid={errors.email !== ''}
                                         onBlur={this.handleBlur('email')}
                                         value={this.state.email}
                                         onChange={this.handleInputChange}
