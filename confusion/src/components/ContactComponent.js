@@ -24,6 +24,7 @@ class Contact extends Component{
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
     }
+
     handleInputChange(event){
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -33,12 +34,13 @@ class Contact extends Component{
             [name]: value
         });
     }
+
     handleSubmit(event){
         console.log('Current State is:'+JSON.stringify(this.state));
         alert('Current State is:'+JSON.stringify(this.state));
         event.preventDefault();
-
     }
+
     handleBlur = (field) => (evt) => {
         this.setState({
             touched: { ...this.state.touched, [field]:true }
