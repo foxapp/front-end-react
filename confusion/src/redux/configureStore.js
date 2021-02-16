@@ -5,6 +5,7 @@ import { Dishes } from "./dishes";
 import { Promotions } from "./promotions";
 import { Comments } from "./comments";
 import { Leaders } from "./leaders";
+import * as ActionCreators from './ActionCreators'
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -13,13 +14,7 @@ export const ConfigureStore = () => {
             comments: Comments,
             promotions: Promotions,
             leaders: Leaders
-        }), undefined,devToolsEnhancer({
-            dishes: Dishes,
-            comments: Comments,
-            promotions: Promotions,
-            leaders: Leaders
-            },
-        ));
+        }), undefined,devToolsEnhancer(ActionCreators.addComment()));
     /*
     const store = createStore(
         Reducer,
