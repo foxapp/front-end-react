@@ -73,7 +73,7 @@ class Contact extends Component{
                                         name="firstname"
                                         placeholder="First Name"
                                         validators={{
-                                            required,minLength: minLength(3), maxLength: maxLength(15)
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
                                         }}
                                     />
                                     <Errors
@@ -98,7 +98,7 @@ class Contact extends Component{
                                         name="lastname"
                                         placeholder="Last Name"
                                         validators={{
-                                            required,minLength: minLength(3), maxLength: maxLength(15)
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
                                         }}
                                     />
                                     <Errors

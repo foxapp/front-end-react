@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-
 export const required = (val) => val && val.length;
 export const maxLength = (len) => (val) => !(val) || (val.length <= len);
 export const minLength = (len) => (val) => (val) && (val.length >= len);
