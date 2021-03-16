@@ -7,7 +7,7 @@ import {Comments} from "./comments";
 import {Leaders} from "./leaders";
 import * as ActionCreators from './ActionCreators'
 import thunk from "redux-thunk";
-import logger from "redux-logger";
+import {logger} from "redux-logger";
 
 export const ConfigureStore = () => {
     /*
@@ -25,6 +25,6 @@ export const ConfigureStore = () => {
             leaders: Leaders
         }),
         applyMiddleware(thunk, logger),
-        devToolsEnhancer(ActionCreators.addComment())
+       // devToolsEnhancer(ActionCreators.addComment())
     );
 }
